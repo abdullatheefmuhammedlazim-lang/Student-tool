@@ -402,6 +402,15 @@ function setLang(l){alert(l==="ml"?"Malayalam interface is active.":"English int
   function toggleDarkMode() {
   document.body.classList.toggle("dark-mode");
 }
+ function searchTools() {
+  const search = document.getElementById("toolSearch").value.toLowerCase();
+  const cards = document.querySelectorAll(".card");
+
+  cards.forEach(card => {
+    const text = card.innerText.toLowerCase();
+    card.style.display = text.includes(search) ? "" : "none";
+  });
+} 
 </script>
 </body>
 </html>
