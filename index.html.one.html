@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description"
+content="Free Malayalam Student Tools - Percentage, CGPA, Grade, Attendance, Age Calculator and more.">
+
+<title>Student Tools Malayalam</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f3f6fb;
+    color:#172033;
+}
+
+header{
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    color:white;
+    padding:35px 15px;
+    text-align:center;
+}
+
+header h1{
+    margin:0 0 8px;
+    font-size:32px;
+}
+
+header p{
+    margin:0;
+    opacity:.9;
+}
+
+.language{
+    margin-top:20px;
+}
+
+.language button{
+    background:white;
+    color:#2563eb;
+    border:0;
+    padding:9px 16px;
+    border-radius:20px;
+    cursor:pointer;
+    margin:3px;
+    font-weight:bold;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:20px;
+}
+
+.tools{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:18px;
+}
+
+.card{
+    background:white;
+    padding:22px;
+    border-radius:16px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.card h2{
+    font-size:20px;
+    margin-top:0;
+}
+
+input,textarea,select{
+    width:100%;
+    padding:12px;
+    margin:7px 0;
+    border:1px solid #d1d5db;
+    border-radius:9px;
+    font-size:15px;
+}
+
+button.calculate{
+    width:100%;
+    background:#2563eb;
+    color:white;
+    border:0;
+    padding:12px;
+    border-radius:9px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.result{
+    margin-top:12px;
+    font-weight:bold;
+    color:#2563eb;
+    min-height:22px;
+}
+
+footer{
+    text-align:center;
+    padding:30px 15px;
+    color:#6b7280;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>📚 <span id="title">Student Tools</span></h1>
+
+<p id="subtitle">
+വിദ്യാർത്ഥികൾക്കായുള്ള സൗജന്യ ഓൺലൈൻ ടൂളുകൾ
+</p>
+
+<div class="language">
+<button onclick="setLanguage('ml')">മലയാളം</button>
+<button onclick="setLanguage('en')">English</button>
+</div>
+
+</header>
+
+
+<div class="container">
+
+<div class="tools">
+
+<!-- Percentage -->
+<div class="card">
+<h2>📊 <span data-ml="Percentage Calculator"
+data-en="Percentage Calculator"></span></h2>
+
+<input id="obtained" type="number"
+placeholder="ലഭിച്ച മാർക്ക്">
+
+<input id="total" type="number"
+placeholder="ആകെ മാർക്ക്">
+
+<button class="calculate" onclick="percentage()">
+കണക്കാക്കുക
+</button>
+
+<div class="result" id="percentageResult"></div>
+</div>
+
+
+<!-- Grade -->
+<div class="card">
+<h2>🎓 Grade Calculator</h2>
+
+<input id="mark" type="number"
+placeholder="Percentage (%)">
+
+<button class="calculate" onclick="grade()">
+Grade കണ്ടെത്തുക
+</button>
+
+<div class="result" id="gradeResult"></div>
+</div>
+
+
+<!-- CGPA -->
+<div class="card">
+<h2>📈 CGPA Calculator</h2>
+
+<input id="cgpa" type="number"
+step="0.01"
+placeholder="CGPA">
+
+<button class="calculate" onclick="calculateCGPA()">
+Convert
+</button>
+
+<div class="result" id="cgpaResult"></div>
+</div>
+
+
+<!-- Attendance -->
+<div class="card">
+<h2>📚 Attendance Calculator</h2>
+
+<input id="present" type="number"
+placeholder="Present days">
+
+<input id="classes" type="number"
+placeholder="Total classes">
+
+<button class="calculate" onclick="attendance()">
+Calculate
+</button>
+
+<div class="result" id="attendanceResult"></div>
+</div>
+
+
+<!-- Age -->
+<div class="card">
+<h2>🎂 Age Calculator</h2>
+
+<input id="dob" type="date">
+
+<button class="calculate" onclick="age()">
+Calculate Age
+</button>
+
+<div class="result" id="ageResult"></div>
+</div>
+
+
+<!-- Word Counter -->
+<div class="card">
+<h2>📝 Word Counter</h2>
+
+<textarea id="text"
+rows="5"
+placeholder="ഇവിടെ text എഴുതുക..."
+oninput="wordCounter()"></textarea>
+
+<div class="result" id="wordResult">
+Words: 0 | Characters: 0
+</div>
+</div>
+
+
+<!-- Basic Calculator -->
+<div class="card">
+<h2>🧮 Calculator</h2>
+
+<input id="num1" type="number"
+placeholder="Number 1">
+
+<input id="num2" type="number"
+placeholder="Number 2">
+
+<select id="operator">
+<option value="+">+</option>
+<option value="-">−</option>
+<option value="*">×</option>
+<option value="/">÷</option>
+</select>
+
+<button class="calculate" onclick="calculator()">
+Calculate
+</button>
+
+<div class="result" id="calcResult"></div>
+</div>
+
+
+<!-- Study Timer -->
+<div class="card">
+<h2>⏱️ Study Timer</h2>
+
+<input id="minutes"
+type="number"
+placeholder="Minutes"
+value="25">
+
+<button class="calculate"
+onclick="startTimer()">
+Start Timer
+</button>
+
+<div class="result" id="timer">25:00</div>
+</div>
+
+
+<!-- Age / Days -->
+<div class="card">
+<h2>📅 Days Calculator</h2>
+
+<input id="date1" type="date">
+<input id="date2" type="date">
+
+<button class="calculate"
+onclick="daysBetween()">
+Calculate Days
+</button>
+
+<div class="result" id="daysResult"></div>
+</div>
+
+
+<!-- Simple Grade Table -->
+<div class="card">
+<h2>📋 Grade Guide</h2>
+
+<p>90% – 100% : A+</p>
+<p>80% – 89% : A</p>
+<p>70% – 79% : B</p>
+<p>60% – 69% : C</p>
+<p>50% – 59% : D</p>
+<p>Below 50% : F</p>
+</div>
+
+</div>
+</div>
+
+
+<footer>
+© 2026 Student Tools Malayalam
+</footer>
+
+
+<script>
+
+function percentage(){
+
+let a=Number(document.getElementById("obtained").value);
+let b=Number(document.getElementById("total").value);
+
+if(b<=0 || a<0 || a>b){
+document.getElementById("percentageResult").innerText=
+"ശരിയായ മാർക്ക് നൽകുക.";
+return;
+}
+
+let p=(a/b)*100;
+
+document.getElementById("percentageResult").innerText=
+"Percentage: "+p.toFixed(2)+"%";
+}
+
+
+function grade(){
+
+let m=Number(document.getElementById("mark").value);
+let g;
+
+if(m>=90) g="A+";
+else if(m>=80) g="A";
+else if(m>=70) g="B";
+else if(m>=60) g="C";
+else if(m>=50) g="D";
+else g="F";
+
+document.getElementById("gradeResult").innerText=
+"Grade: "+g;
+}
+
+
+function calculateCGPA(){
+
+let c=Number(document.getElementById("cgpa").value);
+
+if(c<0){
+document.getElementById("cgpaResult").innerText=
+"ശരിയായ CGPA നൽകുക.";
+return;
+}
+
+let percentage=c*9.5;
+
+document.getElementById("cgpaResult").innerText=
+"Approx. Percentage: "+percentage.toFixed(2)+"%";
+}
+
+
+function attendance(){
+
+let p=Number(document.getElementById("present").value);
+let t=Number(document.getElementById("classes").value);
+
+if(t<=0 || p<0 || p>t){
+document.getElementById("attendanceResult").innerText=
+"ശരിയായ വിവരങ്ങൾ നൽകുക.";
+return;
+}
+
+let result=(p/t)*100;
+
+document.getElementById("attendanceResult").innerText=
+"Attendance: "+result.toFixed(2)+"%";
+}
+
+
+function age(){
+
+let birth=new Date(document.getElementById("dob").value);
+let today=new Date();
+
+if(!document.getElementById("dob").value){
+document.getElementById("ageResult").innerText=
+"ജനന തീയതി തിരഞ്ഞെടുക്കുക.";
+return;
+}
+
+let years=today.getFullYear()-birth.getFullYear();
+
+let month=today.getMonth()-birth.getMonth();
+
+if(month<0 ||
+(month===0 && today.getDate()<birth.getDate())){
+years--;
+}
+
+document.getElementById("ageResult").innerText=
+"Age: "+years+" years";
+}
+
+
+function wordCounter(){
+
+let text=document.getElementById("text").value;
+
+let words=text.trim()===""?
+0:text.trim().split(/\s+/).length;
+
+let chars=text.length;
+
+document.getElementById("wordResult").innerText=
+"Words: "+words+" | Characters: "+chars;
+}
+
+
+function calculator(){
+
+let a=Number(document.getElementById("num1").value);
+let b=Number(document.getElementById("num2").value);
+
+let op=document.getElementById("operator").value;
+let result;
+
+if(op==="+") result=a+b;
+if(op==="-") result=a-b;
+if(op==="*") result=a*b;
+
+if(op==="/"){
+if(b===0){
+document.getElementById("calcResult").innerText=
+"0 കൊണ്ട് divide ചെയ്യാൻ കഴിയില്ല.";
+return;
+}
+result=a/b;
+}
+
+document.getElementById("calcResult").innerText=
+"Result: "+result;
+}
+
+
+let timerInterval;
+
+function startTimer(){
+
+clearInterval(timerInterval);
+
+let minutes=Number(
+document.getElementById("minutes").value
+);
+
+let seconds=minutes*60;
+
+timerInterval=setInterval(function(){
+
+let m=Math.floor(seconds/60);
+let s=seconds%60;
+
+document.getElementById("timer").innerText=
+String(m).padStart(2,"0")+":"+
+String(s).padStart(2,"0");
+
+if(seconds<=0){
+clearInterval(timerInterval);
+alert("Study time completed! 🎉");
+}
+
+seconds--;
+
+},1000);
+}
+
+
+function daysBetween(){
+
+let d1=new Date(document.getElementById("date1").value);
+let d2=new Date(document.getElementById("date2").value);
+
+if(isNaN(d1)||isNaN(d2)){
+document.getElementById("daysResult").innerText=
+"രണ്ട് തീയതികളും തിരഞ്ഞെടുക്കുക.";
+return;
+}
+
+let difference=Math.abs(d2-d1);
+
+let days=Math.ceil(
+difference/(1000*60*60*24)
+);
+
+document.getElementById("daysResult").innerText=
+"Days: "+days;
+}
+
+
+function setLanguage(lang){
+
+if(lang==="en"){
+
+document.getElementById("title").innerText=
+"Student Tools";
+
+document.getElementById("subtitle").innerText=
+"Free online tools for students";
+
+}else{
+
+document.getElementById("title").innerText=
+"Student Tools";
+
+document.getElementById("subtitle").innerText=
+"വിദ്യാർത്ഥികൾക്കായുള്ള സൗജന്യ ഓൺലൈൻ ടൂളുകൾ";
+}
+
+}
+
+</script>
+
+</body>
+</html>
