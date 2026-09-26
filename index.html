@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Tools Kerala – Free Student Calculators</title>
+  <meta name="description" content="Free student tools in Malayalam and English: percentage, grade, CGPA, attendance, GPA, exam marks, budget, age, word counter, study timer and more.">
+  <meta name="keywords" content="student tools Kerala, percentage calculator, CGPA calculator, attendance calculator, GPA calculator, grade calculator, exam marks calculator, Malayalam student tools">
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172033}
+    header{background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;padding:28px 16px;text-align:center}
+    header h1{margin:0 0 8px;font-size:30px}
+    header p{margin:0;opacity:.92}
+    .wrap{max-width:1100px;margin:auto;padding:18px}
+    .top{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:18px 0}
+    button{border:0;border-radius:10px;padding:11px 16px;background:#2563eb;color:#fff;font-size:15px;cursor:pointer}
+    button:hover{opacity:.9}
+    .lang{background:#111827}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
+    .card{background:#fff;border-radius:16px;padding:18px;box-shadow:0 5px 18px rgba(0,0,0,.07)}
+    .card h2{font-size:19px;margin:0 0 12px}
+    input,textarea,select{width:100%;padding:11px;margin:6px 0 9px;border:1px solid #d6dbe5;border-radius:9px;font-size:15px}
+    textarea{min-height:120px;resize:vertical}
+    .result{margin-top:10px;padding:10px;border-radius:9px;background:#eef4ff;font-weight:bold;min-height:20px}
+    .small{font-size:13px;color:#667085}
+    footer{text-align:center;padding:28px 12px;color:#667085}
+    .full{grid-column:1/-1}
+    .faq{margin-top:20px}
+    .faq h2{margin-bottom:8px}
+    @media(max-width:500px){header h1{font-size:25px}.wrap{padding:12px}.card{padding:15px}}
+  </style>
+</head>
+<body>
+<header>
+  <h1>🎓 Student Tools</h1>
+  <p>Students-ന് വേണ്ട Free Calculators & Study Tools</p>
+</header>
+
+<div class="wrap">
+  <div class="top">
+    <button class="lang" onclick="setLang('ml')">മലയാളം</button>
+    <button class="lang" onclick="setLang('en')">English</button>
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <h2>📊 Percentage Calculator</h2>
+      <input id="pObt" type="number" placeholder="Obtained marks">
+      <input id="pTotal" type="number" placeholder="Total marks">
+      <button onclick="percentage()">Calculate</button>
+      <div class="result" id="pRes"></div>
+    </div>
+
+    <div class="card">
+      <h2>🎯 Grade Calculator</h2>
+      <input id="gMark" type="number" placeholder="Percentage">
+      <button onclick="grade()">Find Grade</button>
+      <div class="result" id="gRes"></div>
+    </div>
+
+    <div class="card">
+      <h2>🎓 CGPA Calculator</h2>
+      <input id="cgpa" type="number" step="0.01" placeholder="CGPA">
+      <button onclick="cgpaCalc()">Calculate</button>
+      <div class="result" id="cgpaRes"></div>
+      <div class="small">Percentage conversion varies by board/university.</div>
+    </div>
+
+    <div class="card">
+      <h2>📅 Attendance Calculator</h2>
+      <input id="attPresent" type="number" placeholder="Classes attended">
+      <input id="attTotal" type="number" placeholder="Total classes">
+      <button onclick="attendance()">Calculate</button>
+      <div class="result" id="attRes"></div>
+    </div>
+
+    <div class="card">
+      <h2>🎂 Age Calculator</h2>
+      <input id="dob" type="date">
+      <button onclick="ageCalc()">Calculate Age</button>
+      <div class="result" id="ageRes"></div>
+    </div>
+
+    <div class="card">
+      <h2>🔤 Word Counter</h2>
+      <textarea id="words" placeholder="Type or paste your text"></textarea>
+      <button onclick="wordCount()">Count</button>
+      <div class="result" id="wordRes"></div>
+    </div>
+
+    <div class="card">
+      <h2>🧮 Basic Calculator</h2>
+      <input id="calc" placeholder="Example: 25*4+10">
+      <button onclick="basicCalc()">Calculate</button>
+      <div class="result" id="calcRes"></div>
+    </div>
+
+    <div class="card">
+      <h2>⏱️ Study Timer</h2>
+      <input id="minutes" type="number" value="25" min="1" placeholder="Minutes">
+      <button onclick="startTimer()">Start</button>
+      <button onclick="stopTimer()">Stop</button>
+      <div class="result" id="timer">25:00</div>
+    </div>
+
+    <div class="card">
+      <h2>📆 Days Calculator</h2>
+      <input id="date1" type="date">
+      <input id="date2" type="date">
+      <button onclick="daysCalc()">Calculate Days</button>
+      <div class="result" id="daysRes"></div>
+    </div>
+
+    <div class="card">
+      <h2>📚 Grade Guide</h2>
+      <p>90–100: A+</p><p>80–89: A</p><p>70–79: B+</p><p>60–69: B</p><p>50–59: C+</p><p>40–49: C</p><p>Below 40: D / Need Improvement</p>
+      <div class="small">Your school/board may use different grade boundaries.</div>
+    </div>
+
+    <div class="card">
+      <h2>🏆 GPA Calculator</h2>
+      <input id="gp1" type="number" step="0.01" placeholder="Grade point 1">
+      <input id="gp2" type="number" step="0.01" placeholder="Grade point 2">
+      <input id="gp3" type="number" step="0.01" placeholder="Grade point 3">
+      <input id="gp4" type="number" step="0.01" placeholder="Grade point 4">
+      <button onclick="gpaCalc()">Calculate GPA</button>
+      <div class="result" id="gpaRes"></div>
+    </div>
+
+    <div class="card">
+      <h2>📝 Exam Mark Calculator</h2>
+      <input id="exam1" type="number" placeholder="Exam marks">
+      <input id="exam2" type="number" placeholder="Assignment / internal marks">
+      <input id="examTotal" type="number" placeholder="Total possible marks" value="100">
+      <button onclick="examCalc()">Calculate</button>
+      <div class="result" id="examRes"></div>
+    </div>
+
+    <div class="card">
+      <h2>📅 Study Schedule Generator</h2>
+      <input id="subjects" placeholder="Subjects (comma separated)">
+      <input id="studyHours" type="number" min="1" placeholder="Hours available">
+      <button onclick="schedule()">Generate</button>
+      <div class="result" id="scheduleRes"></div>
+    </div>
+
+    <div class="card">
+      <h2>💰 Student Budget Calculator</h2>
+      <input id="income" type="number" placeholder="Monthly money / allowance">
+      <input id="food" type="number" placeholder="Food">
+      <input id="travel" type="number" placeholder="Travel">
+      <input id="study" type="number" placeholder="Study / other">
+      <button onclick="budget()">Calculate</button>
+      <div class="result" id="budgetRes"></div>
+    </div>
+
+    <div class="card">
+      <h2>🏫 Attendance Target Calculator</h2>
+      <input id="curP" type="number" placeholder="Classes attended">
+      <input id="curT" type="number" placeholder="Total classes">
+      <input id="target" type="number" value="75" placeholder="Target %">
+      <button onclick="targetAttendance()">Calculate</button>
+      <div class="result" id="targetRes"></div>
+    </div>
+
+    <div class="card full faq">
+      <h2>❓ Frequently Asked Questions</h2>
+      <p><b>CGPA എങ്ങനെ percentage ആക്കും?</b><br>Some institutions use CGPA × 9.5, but the official conversion can differ. Check your board/university rules.</p>
+      <p><b>ഈ tools free ആണോ?</b><br>അതെ. ഈ website-ലെ calculators free ആയി ഉപയോഗിക്കാം.</p>
+      <p><b>Mobile-ൽ ഉപയോഗിക്കാമോ?</b><br>അതെ, website mobile-friendly ആണ്.</p>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 Student Tools • Made for students</footer>
+
+<script>
+function percentage(){
+  const a=+pObt.value,b=+pTotal.value;
+  pRes.textContent=b>0?((a/b)*100).toFixed(2)+"%":"Enter valid marks";
+}
+function grade(){
+  const x=+gMark.value;
+  gRes.textContent=x>=90?"A+":x>=80?"A":x>=70?"B+":x>=60?"B":x>=50?"C+":x>=40?"C":"D";
+}
+function cgpaCalc(){
+  const x=+cgpa.value;
+  cgpaRes.textContent=x>0?"Approx. percentage: "+(x*9.5).toFixed(2)+"%":"Enter CGPA";
+}
+function attendance(){
+  const a=+attPresent.value,b=+attTotal.value;
+  attRes.textContent=b>0?((a/b)*100).toFixed(2)+"%":"Enter valid classes";
+}
+function ageCalc(){
+  if(!dob.value){ageRes.textContent="Select date of birth";return}
+  const d=new Date(dob.value), n=new Date();
+  let y=n.getFullYear()-d.getFullYear(), m=n.getMonth()-d.getMonth();
+  if(m<0||(m===0&&n.getDate()<d.getDate())) y--;
+  ageRes.textContent=y+" years";
+}
+function wordCount(){
+  const t=words.value.trim(), w=t?t.split(/\s+/).length:0;
+  wordRes.textContent="Words: "+w+" | Characters: "+words.value.length;
+}
+function basicCalc(){
+  try{calcRes.textContent=Function('"use strict";return ('+calc.value+')')()}catch(e){calcRes.textContent="Invalid calculation";}
+}
+let timerId=null, seconds=1500;
+function startTimer(){
+  clearInterval(timerId);
+  const m=Math.max(1,+minutes.value||25); seconds=m*60;
+  updateTimer();
+  timerId=setInterval(()=>{seconds--;updateTimer();if(seconds<=0)clearInterval(timerId)},1000);
+}
+function stopTimer(){clearInterval(timerId)}
+function updateTimer(){const m=Math.floor(seconds/60),s=seconds%60;timer.textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")}
+function daysCalc(){
+  if(!date1.value||!date2.value){daysRes.textContent="Select both dates";return}
+  const a=new Date(date1.value),b=new Date(date2.value);
+  daysRes.textContent=Math.round(Math.abs(b-a)/86400000)+" days";
+}
+function gpaCalc(){
+  const v=[gp1.value,gp2.value,gp3.value,gp4.value].map(Number).filter(x=>!isNaN(x)&&x>0);
+  gpaRes.textContent=v.length?(v.reduce((a,b)=>a+b,0)/v.length).toFixed(2):"Enter grade points";
+}
+function examCalc(){
+  const a=+exam1.value||0,b=+exam2.value||0,t=+examTotal.value||100;
+  examRes.textContent="Total: "+(a+b)+" / "+t+" ("+(((a+b)/t)*100).toFixed(2)+"%)";
+}
+function schedule(){
+  const s=subjects.value.split(",").map(x=>x.trim()).filter(Boolean), h=+studyHours.value;
+  if(!s.length||!h){scheduleRes.textContent="Enter subjects and hours";return}
+  const each=(h/s.length).toFixed(2);
+  scheduleRes.innerHTML=s.map((x,i)=>`${i+1}. ${x} — ${each} hour`).join("<br>");
+}
+function budget(){
+  const i=+income.value||0, e=(+food.value||0)+(+travel.value||0)+(+study.value||0);
+  budgetRes.textContent="Expenses: ₹"+e+" | Remaining: ₹"+(i-e);
+}
+function targetAttendance(){
+  const p=+curP.value,t=+curT.value,r=+target.value;
+  if(!t||r<=0||r>=100){targetRes.textContent="Enter valid values";return}
+  if(p/t*100>=r){targetRes.textContent="You already meet the target.";return}
+  const n=Math.ceil((r*t/100-p)/(1-r/100));
+  targetRes.textContent="Need to attend approximately "+n+" more classes continuously.";
+}
+function setLang(l){alert(l==="ml"?"Malayalam interface is active.":"English interface is active.");}
+</script>
+</body>
+</html>
