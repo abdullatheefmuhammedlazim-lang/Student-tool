@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://abdullatheefmuhammedlazim-lang.github.io/Student-tool/sitemap.xml
