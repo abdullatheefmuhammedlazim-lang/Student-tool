@@ -436,6 +436,46 @@ button:hover {
     </div>
 
     <div class="card">
+  <h2>📈 SGPA Calculator – Calculate SGPA Online</h2>
+
+  <p class="small">
+    വിദ്യാർത്ഥികൾക്ക് semester grade points ഉപയോഗിച്ച് SGPA എളുപ്പത്തിൽ കണക്കാക്കാനുള്ള സൗജന്യ online calculator.
+  </p>
+
+  <input id="sgpa1" type="number" step="0.01" placeholder="Subject 1 Grade Point">
+  <input id="sgpa2" type="number" step="0.01" placeholder="Subject 2 Grade Point">
+  <input id="sgpa3" type="number" step="0.01" placeholder="Subject 3 Grade Point">
+  <input id="sgpa4" type="number" step="0.01" placeholder="Subject 4 Grade Point">
+
+  <button onclick="sgpaCalc()">Calculate SGPA</button>
+
+  <div class="result" id="sgpaRes"></div>
+
+  <div class="small" style="margin-top:20px;">
+    <h3>📚 How to Calculate SGPA?</h3>
+
+    <p>
+      SGPA എന്നത് ഒരു semester-ലെ grade points-ന്റെ ശരാശരിയാണ്.
+    </p>
+
+    <p>
+      <strong>SGPA = Total Grade Points ÷ Number of Subjects</strong>
+    </p>
+
+    <p>
+      <strong>Example:</strong><br>
+      Grade Points = 8, 9, 7, 8<br>
+      Subjects = 4
+    </p>
+
+    <p>
+      SGPA = (8 + 9 + 7 + 8) ÷ 4 =
+      <strong>8.00</strong>
+    </p>
+  </div>
+</div>
+
+    <div class="card">
       <h2>📝 Exam Mark Calculator – Calculate Exam Marks Online</h2>
 <p class="small">വിദ്യാർത്ഥികൾക്ക് exam marks, total marks, percentage എന്നിവ എളുപ്പത്തിൽ കണക്കാക്കാനുള്ള സൗജന്യ calculator.</p>
       <input id="exam1" type="number" placeholder="Exam marks">
