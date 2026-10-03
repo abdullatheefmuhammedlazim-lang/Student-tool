@@ -631,6 +631,18 @@ function setLang(l){alert(l==="ml"?"Malayalam interface is active.":"English int
     card.style.display = text.includes(search) ? "" : "none";
   });
 } 
+  function sgpaCalc(){
+  const v = [
+    sgpa1.value,
+    sgpa2.value,
+    sgpa3.value,
+    sgpa4.value
+  ].map(Number).filter(x => !isNaN(x) && x >= 0);
+
+  sgpaRes.textContent = v.length
+    ? "SGPA: " + (v.reduce((a,b) => a+b, 0) / v.length).toFixed(2)
+    : "Enter grade points";
+}
 </script>
   <footer class="site-footer">
   <h3>🎓 Student Tools</h3>
